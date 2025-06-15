@@ -1,0 +1,27 @@
+package com.garritas.sgv.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "inventario")
+public class Inventario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
+    private Long idProducto;
+
+    private String nombre;
+
+    private String descripcion;
+
+    private String categoria;
+
+    private String proveedor;
+
+    private Double precio;
+
+    private Integer cantidad;
+
+    // Getters y Setters
+}
