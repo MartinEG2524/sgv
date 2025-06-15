@@ -12,7 +12,7 @@
 	<artifactId>sgv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sgv</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Sistema Veterinario en Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -69,8 +69,11 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+    		<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- Si ya tienes spring-boot-starter-test, no necesitas agregar mockito-core manualmente salvo que desees fijar versión -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -80,6 +83,31 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Pruebas con Spring Boot y JUnit -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>32.1.2-jre</version>
 		</dependency>
 	</dependencies>
 

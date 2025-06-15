@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import com.google.common.base.Preconditions;
 
 @Service
 public class VeterinarioServiceImpl implements VeterinarioService {
@@ -28,6 +29,7 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public Veterinario guardar(Veterinario veterinario) {
+        Preconditions.checkNotNull(veterinario.getNombres(), "El nombre no puede ser null");
         return veterinarioRepository.save(veterinario);
     }
 

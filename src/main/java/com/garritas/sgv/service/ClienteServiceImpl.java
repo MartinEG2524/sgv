@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -26,8 +27,10 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.findById(id);
     }
 
-    @Override
     public Cliente guardar(Cliente cliente) {
+    if (StringUtils.isBlank(cliente.getNombres())) {
+        throw new IllegalArgumentException("El nombre no puede estar vacío");
+    }
         return clienteRepository.save(cliente);
     }
 

@@ -2,7 +2,11 @@ package com.garritas.sgv.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "servicio")
 public class Servicio {

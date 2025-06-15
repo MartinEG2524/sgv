@@ -2,7 +2,11 @@ package com.garritas.sgv.model;
 
 import jakarta.persistence.*;
 import java.time.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "historialclinico")
 public class HistorialClinico {
