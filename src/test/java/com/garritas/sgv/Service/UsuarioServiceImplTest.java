@@ -1,16 +1,22 @@
-package com.garritas.sgv.service;
+package com.garritas.sgv.Service;
 
 import com.garritas.sgv.model.Usuario;
 import com.garritas.sgv.model.Cargo;
 import com.garritas.sgv.repository.UsuarioRepository;
+import com.garritas.sgv.service.UsuarioServiceImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 import java.util.List;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class UsuarioServiceImplTest {
 

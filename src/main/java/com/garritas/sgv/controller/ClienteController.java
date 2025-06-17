@@ -4,6 +4,7 @@ import com.garritas.sgv.model.Cliente;
 import com.garritas.sgv.service.ClienteService;
 import com.garritas.sgv.util.ClienteReporteService;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,7 @@ public class ClienteController {
             byte[] contenido = excel.readAllBytes();
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", "attachment; filename=clientes.xlsx");
+            headers.add("Content-Disposition", "attachment; filename=ReporteClientes.xlsx");
 
             return ResponseEntity.ok()
                     .headers(headers)
