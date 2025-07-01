@@ -1,7 +1,7 @@
 package com.garritas.sgv.model;
 
 import jakarta.persistence.*;
-import java.time.*;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 

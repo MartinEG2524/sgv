@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
+		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.garritas</groupId>
@@ -64,6 +64,7 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
+			<version>11.2.3.jre11</version> <!-- Compatible con Java 24 -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -73,12 +74,21 @@
     		<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- Si ya tienes spring-boot-starter-test, no necesitas agregar mockito-core manualmente salvo que desees fijar versión -->
+		<!-- Si ya tienes spring-boot-starter-test, no necesitas agregar mockito manualmente. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Salvo que desees fijar versión pero puede causar conflicto, porque mockito-all es muy antiguo y ya viene incluido en spring-boot-starter-test.
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>provided</scope>
+		</dependency>
+		-->
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -101,7 +111,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
 		</dependency>
 		
 		<dependency>
@@ -109,13 +118,7 @@
 			<artifactId>guava</artifactId>
 			<version>32.1.2-jre</version>
 		</dependency>
-	
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-		</dependency>
- </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

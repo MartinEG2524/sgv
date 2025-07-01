@@ -1,0 +1,1 @@
+console.log("Frontend cargado desde Spring Boot");
