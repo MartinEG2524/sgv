@@ -1,9 +1,213 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-  <title>Inicio</title>
+    <meta charset="UTF-8">
+    <title>Login - Veterinaria</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #e0e0e0;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #888;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        nav {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            border-right: 1px solid #000;
+            padding-right: 10px;
+        }
+
+        nav a:last-child {
+            border-right: none;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container img {
+            width: 100px;
+        }
+
+        h2 {
+            color: #1f3f66;
+            margin-top: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px auto 5px;
+            text-align: left;
+            width: 250px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 250px;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            margin: 20px 0;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #2c5d92;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #bbb;
+            color: white;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .forgot-password a {
+            color: red;
+            text-decoration: none;
+        }
+
+        .create-account {
+            margin-top: 20px;
+        }
+
+        .create-account button {
+            background-color: #2c5d92;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid #ccc;
+            margin-top: 40px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+
+        .social-icons img {
+            width: 30px;
+            margin: 0 5px;
+        }
+
+        .address {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <h1>Hola</h1>
+
+    <header>
+        <img src="Imagenes/logo.png" alt="Logo Veterinaria">
+        <nav>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="mascotas.html">Mascotas</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <img src="Imagenes/logo.png" alt="Logo">
+        <h2>BIENVENIDO</h2>
+        <form onsubmit="return validarLogin(event)">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" placeholder="Ingrese su DNI">
+
+            <label for="password">CONTRASEÑA:</label>
+            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
+
+            <div class="buttons">
+                <button type="submit" class="btn-login">INICIAR SESIÓN</button>
+                <button type="reset" class="btn-cancel">CANCELAR</button>
+            </div>
+
+            <div class="forgot-password">
+                ¿Olvidaste tu contraseña? <br>
+                <a href="#">Clic aquí</a>
+            </div>
+
+            <div class="create-account">
+                <button type="button">CREAR CUENTA</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <img src="Imagenes/facebook.png" alt="Facebook">
+            <img src="Imagenes/twitter.png" alt="Twitter">
+            <img src="Imagenes/instagram.png" alt="Instagram">
+        </div>
+        <div class="address">
+            Av. Crisantemos N° 221 – LIMA – PERÚ
+        </div>
+    </footer>
+
+    <script>
+        function validarLogin(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            const dni = document.getElementById('dni').value;
+            const pass = document.getElementById('password').value;
+
+            if (dni === "20052121" && pass === "Admin") {
+                alert("Inicio de sesión exitoso");
+                window.location.href = "menu.html"; // Aquí puedes redirigir a otra página si deseas
+            } else {
+                alert("DNI o contraseña incorrectos");
+            }
+        }
+    </script>
+
 </body>
 </html>
