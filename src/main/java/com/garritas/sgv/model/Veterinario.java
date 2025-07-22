@@ -35,6 +35,4 @@ public class Veterinario {
     private String provincia;
     private String distrito;
     private String estado;
-
-    // Getters y setters
 }

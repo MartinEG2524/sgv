@@ -38,7 +38,4 @@ public class Cliente {
     private String provincia;
     private String distrito;
     private String estado;
-
-    // Getters y setters
-
 }

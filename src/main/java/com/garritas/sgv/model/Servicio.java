@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "servicio")
+@Table(name = "servicios")
 public class Servicio {
 
     @Id
@@ -23,6 +23,4 @@ public class Servicio {
     private BigDecimal precio;
 
     private String estado;
-
-    // Getters y Setters
 }

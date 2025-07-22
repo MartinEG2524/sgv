@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "inventario")
+@Table(name = "inventarios")
 public class Inventario {
 
     @Id
@@ -26,6 +26,4 @@ public class Inventario {
     private Double precio;
 
     private Integer cantidad;
-
-    // Getters y Setters
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Veterinaria Garritas</title>
+    <link rel="stylesheet" href="/CSS/Estilos.css">
+</head>
+<body>
+
+    <header>
+        <img src="/Imagenes/logo.png" alt="Logo Veterinaria">
+        <nav>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="mascotas.html">Mascotas</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <img src="/Imagenes/logo.png" alt="Logo">
+        <h2>BIENVENIDO</h2>
+        <form id="inicioForm" action="#" th:action="@{/login}" method="post" >
+            <label for="codigo">CÓDIGO:</label>
+            <input type="text" id="codigo" name="codigo" placeholder="Ingrese su código" required />
+
+            <label for="contrasena">CONTRASEÑA:</label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required />
+
+            <div class="buttons">
+                <button type="submit" class="btn-login">INICIAR SESIÓN</button>
+                <button type="reset" class="btn-cancel">CANCELAR</button>
+            </div>
+
+            <!-- Si la autenticación falla, mostrará un mensaje -->
+            <div th:if="${param.error}" style="color:red;">
+                Usuario o contraseña incorrecto.
+            </div>
+
+            <!-- Enlace para redirigir a la página de recuperación de contraseña -->
+            <div class="forgot-password">
+                ¿Olvidaste tu contraseña? <br>
+                <a href="restablecer">Clic aquí</a>
+            </div>
+
+            <div class="create-account">
+                <button type="button">CREAR CUENTA</button>
+            </div>
+        </form>
+
+        <p th:if="${param.logout}" style="color:green;">¡Se ha cerrado la sesión correctamente!</p>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <img src="Imagenes/facebook.png" alt="Facebook">
+            <img src="Imagenes/twitter.png" alt="Twitter">
+            <img src="Imagenes/instagram.png" alt="Instagram">
+        </div>
+        <div class="address">
+            Av. Crisantemos N° 221 – LIMA – PERÚ
+        </div>
+    </footer>
+
+    <script src="/JS/FuncionLogin.js"></script>
+</body>
+</html>

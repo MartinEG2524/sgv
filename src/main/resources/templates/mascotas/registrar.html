@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar Nueva Mascota</title>
+</head>
+<body>
+    <h1>Agregar Nueva Mascota</h1>
+    <form action="#" th:action="@{/mascotas}" th:object="${mascota}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required /><br>
+
+        <label for="raza">Raza:</label>
+        <input type="text" id="raza" th:field="*{raza}" required /><br>
+
+        <button type="submit">Guardar Mascota</button>
+    </form>
+    <a href="/mascotas">Volver al listado</a>
+</body>
+</html>

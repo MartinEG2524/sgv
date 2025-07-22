@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Mascotas</title>
+</head>
+<body>
+    <h1>Listado de Mascotas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Raza</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="mascota : ${mascotas}">
+                <td th:text="${mascota.id}"></td>
+                <td th:text="${mascota.nombre}"></td>
+                <td th:text="${mascota.raza}"></td>
+                <td>
+                    <a th:href="@{/mascotas/{id}(id=${mascota.id})}">Ver</a>
+                    <a th:href="@{/mascotas/editar/{id}(id=${mascota.id})}">Editar</a>
+                    <a th:href="@{/mascotas/eliminar/{id}(id=${mascota.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/mascotas/registrar">Agregar nueva mascota</a>
+</body>
+</html>

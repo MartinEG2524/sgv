@@ -2,13 +2,15 @@ package com.garritas.sgv.controller;
 
 import com.garritas.sgv.model.HistorialClinico;
 import com.garritas.sgv.service.HistorialClinicoService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/historiales")
+@Controller
+@RequestMapping("/historiales")
 public class HistorialClinicoController {
 
     private final HistorialClinicoService service;
@@ -17,25 +19,63 @@ public class HistorialClinicoController {
         this.service = service;
     }
 
+    // Vista de todos los historiales clínicos, solo accesible para ADMIN y VETERINARIO
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_VETERINARIO')")
     @GetMapping
-    public List<HistorialClinico> listar() {
-        return service.listar();
+    public String listar(Model model) {
+        List<HistorialClinico> historiales = service.listar();
+        model.addAttribute("historiales", historiales);
+        return "historiales/listar";
     }
 
+    // Vista para ver un historial clínico específico, solo accesible para ADMIN y VETERINARIO
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_VETERINARIO')")
     @GetMapping("/{id}")
-    public ResponseEntity<HistorialClinico> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public String buscarHistorial(@PathVariable Long id, Model model) {
+        HistorialClinico historial = service.buscarPorId(id).orElse(null);
+        model.addAttribute("historial", historial);
+        return "historiales/ver";
     }
 
+    // Vista para agregar un nuevo historial clínico, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/registrar")
+    public String registrarHistorial(Model model) {
+        model.addAttribute("historial", new HistorialClinico());
+        return "historiales/registrar";
+    }
+
+    // Guardar un nuevo historial clínico, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public HistorialClinico guardar(@RequestBody HistorialClinico historial) {
-        return service.guardar(historial);
+    public String guardarHistorial(@ModelAttribute HistorialClinico historial) {
+        service.guardar(historial);  // Guardar el historial clínico
+        return "redirect:/historiales";
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
+    // Eliminar un historial clínico, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/eliminar/{id}")
+    public String eliminarHistorial(@PathVariable Long id) {
         service.eliminar(id);
+        return "redirect:/historiales";
+    }
+
+    // Vista para editar un historial clínico existente, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/editar/{id}")
+    public String editarHistorial(@PathVariable Long id, Model model) {
+        HistorialClinico historial = service.buscarPorId(id).orElse(null);
+        model.addAttribute("historial", historial);
+        return "historiales/editar";
+    }
+
+    // Guardar los cambios de un historial clínico editado, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/editar/{id}")
+    public String actualizarHistorial(@PathVariable Long id, @ModelAttribute HistorialClinico historial) {
+        historial.setIdHistorial(id);
+        service.guardar(historial);
+        return "redirect:/historiales";
     }
 }

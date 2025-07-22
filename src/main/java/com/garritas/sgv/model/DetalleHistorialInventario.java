@@ -4,11 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
-@Table(name = "detallehistorialinventario")
+@Table(name = "detalle_historial_inventario")
 public class DetalleHistorialInventario {
 
     @Id
@@ -26,6 +25,4 @@ public class DetalleHistorialInventario {
 
     @Column(name = "cantidad_utilizada")
     private Integer cantidadUtilizada;
-
-    // Getters y Setters
 }

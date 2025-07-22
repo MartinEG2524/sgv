@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "historialclinico")
+@Table(name = "historial_clinico")
 public class HistorialClinico {
 
     @Id
@@ -34,6 +34,4 @@ public class HistorialClinico {
     private String tratamiento;
 
     private String estado;
-
-    // Getters y Setters
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "cita")
+@Table(name = "citas")
 public class Cita {
 
     @Id
@@ -33,6 +33,4 @@ public class Cita {
     private LocalTime hora;
 
     private String estado;
-
-    // Getters y Setters
 }

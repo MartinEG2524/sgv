@@ -2,13 +2,15 @@ package com.garritas.sgv.controller;
 
 import com.garritas.sgv.model.Usuario;
 import com.garritas.sgv.service.UsuarioService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/usuarios")
+@Controller
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -17,25 +19,63 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    // Vista de todos los usuarios, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
-    public List<Usuario> listar() {
-        return usuarioService.listar();
+    public String listar(Model model) {
+        List<Usuario> usuarios = usuarioService.listar();
+        model.addAttribute("usuarios", usuarios);
+        return "usuarios/listar";
     }
 
+    // Vista para ver un usuario específico, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
-        return usuarioService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public String buscarUsuario(@PathVariable Long id, Model model) {
+        Usuario usuario = usuarioService.buscarPorId(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+        return "usuarios/ver";
     }
 
+    // Vista para agregar un nuevo usuario, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/registrar")
+    public String registrarUsuario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "usuarios/registrar";
+    }
+
+    // Guardar un nuevo usuario, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public Usuario guardar(@RequestBody Usuario usuario) {
-        return usuarioService.guardar(usuario);
+    public String guardarUsuario(@ModelAttribute Usuario usuario) {
+        usuarioService.guardar(usuario);
+        return "redirect:/usuarios";
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
+    // Eliminar un usuario, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminar(id);
+        return "redirect:/usuarios";
+    }
+
+    // Vista para editar un usuario existente, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/editar/{id}")
+    public String editarUsuario(@PathVariable Long id, Model model) {
+        Usuario usuario = usuarioService.buscarPorId(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+        return "usuarios/editar";
+    }
+
+    // Guardar los cambios de un usuario editado, solo accesible para ADMIN
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/editar/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
+        usuario.setIdUsuario(id);
+        usuarioService.guardar(usuario);
+        return "redirect:/usuarios";
     }
 }

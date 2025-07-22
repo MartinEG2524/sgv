@@ -20,8 +20,6 @@ public class Cargo {
     private String descripcion;
     private String estado;
 
-    @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "idCargo", fetch = FetchType.LAZY)
     private List<Usuario> usuarios;
-
-    // Getters y setters
 }

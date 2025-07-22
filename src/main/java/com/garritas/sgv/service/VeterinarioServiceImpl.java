@@ -1,20 +1,32 @@
 package com.garritas.sgv.service;
 
 import com.garritas.sgv.model.Veterinario;
+import com.garritas.sgv.model.Cita;
+import com.garritas.sgv.model.HistorialClinico;
+import com.garritas.sgv.model.Servicio;
 import com.garritas.sgv.repository.VeterinarioRepository;
+import com.garritas.sgv.repository.CitaRepository;
+import com.garritas.sgv.repository.HistorialClinicoRepository;
+import com.garritas.sgv.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import com.google.common.base.Preconditions;
 
 @Service
 public class VeterinarioServiceImpl implements VeterinarioService {
 
     private final VeterinarioRepository veterinarioRepository;
+    private final CitaRepository citaRepository;
+    private final HistorialClinicoRepository historialClinicoRepository;
+    private final ServicioRepository servicioRepository;
 
-    public VeterinarioServiceImpl(VeterinarioRepository veterinarioRepository) {
+    public VeterinarioServiceImpl(VeterinarioRepository veterinarioRepository, CitaRepository citaRepository,
+        HistorialClinicoRepository historialClinicoRepository, ServicioRepository servicioRepository) {
         this.veterinarioRepository = veterinarioRepository;
+        this.citaRepository = citaRepository;
+        this.historialClinicoRepository = historialClinicoRepository;
+        this.servicioRepository = servicioRepository;
     }
 
     @Override
@@ -29,12 +41,27 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public Veterinario guardar(Veterinario veterinario) {
-        Preconditions.checkNotNull(veterinario.getNombres(), "El nombre no puede ser null");
         return veterinarioRepository.save(veterinario);
     }
 
     @Override
     public void eliminar(Long id) {
         veterinarioRepository.deleteById(id);
+    }
+
+    // Implementación de los métodos de citas, historial y servicios
+    @Override
+    public List<Cita> obtenerCitas() {
+        return citaRepository.findAll();
+    }
+
+    @Override
+    public List<HistorialClinico> obtenerHistorial() {
+        return historialClinicoRepository.findAll();
+    }
+
+    @Override
+    public List<Servicio> obtenerServicios() {
+        return servicioRepository.findAll();
     }
 }

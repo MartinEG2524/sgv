@@ -42,6 +42,4 @@ public class Mascota {
     private String estadoClinico;
 
     private String estado;
-
-    // Getters y Setters
 }
