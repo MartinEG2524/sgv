@@ -1,7 +1,8 @@
 package com.garritas.sgv.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+
+import java.sql.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +32,7 @@ public class Cliente {
     private String sexo;
 
     @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
 
     private Integer celular;
     private String pais;

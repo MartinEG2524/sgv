@@ -40,7 +40,7 @@
     }
 
     .nosotros {
-      padding: 40px 20px;
+      padding: 0px 20px;
       text-align: center;
     }
 
@@ -76,7 +76,7 @@
       background-color: white;
       text-align: center;
       padding: 15px;
-      margin-top: 40px;
+      margin-top: 15px;
       border-top: 1px solid #ccc;
     }
 
@@ -93,18 +93,9 @@
   </style>
 </head>
 <body>
-
-  <header>
-    <img src="logo.png" alt="Logo de la veterinaria">
-    <nav>
-      <a href="#">Nosotros</a>
-      <a href="#">Mascotas</a>
-      <a href="#">Servicios</a>
-      <a href="#">Especialidades</a>
-      <a href="#">Contacto</a>
-    </nav>
-    <button class="btn-cerrar">CERRAR SESIÓN</button>
-  </header>
+  <div style="display: flex; justify-content: center; padding-top: 25px;">
+      <img src="Imagenes/logo.png" alt="Logo Veterinaria" class="logo">
+  </div>
 
   <section class="nosotros">
     <h2>Nosotros</h2>
@@ -124,11 +115,15 @@
     </div>
   </section>
 
+  <div style="text-align: center;">
+    <a href="/inicio" style="font-size: 24px; text-decoration: none; color: blue;">Volver a Inicio</a>
+  </div>
+
   <footer>
     <div class="social-icons">
-      <img src="facebook.png" alt="Facebook">
-      <img src="twitter.png" alt="X">
-      <img src="instagram.png" alt="Instagram">
+      <img src="Imagenes/facebook.png" alt="Facebook">
+      <img src="Imagenes/twitter.png" alt="X">
+      <img src="Imagenes/instagram.png" alt="Instagram">
     </div>
     <div class="direccion">Av. Crisantemos N° 221 – LIMA - PERÚ</div>
   </footer>

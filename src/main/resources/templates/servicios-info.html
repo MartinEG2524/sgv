@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Veterinaria - Servicios</title>
+  <title>Servicios - Veterinaria Garritas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
+      margin-top: 15px;
       background-color: #f5f5f5;
     }
 
@@ -26,7 +26,7 @@
     }
 
     .servicios {
-      padding: 50px;
+      padding: 30px;
       max-width: 1000px;
       margin: auto;
       background-color: #ffffff;
@@ -37,7 +37,8 @@
     .servicios h2 {
       text-align: center;
       color: #0077b6;
-      margin-bottom: 40px;
+      margin-top: 0px;
+      margin-bottom: 25px;
     }
 
     .cards {
@@ -73,11 +74,6 @@
   </style>
 </head>
 <body>
-
-  <nav>
-    <a onclick="mostrarSeccion('servicios')">Servicios</a>
-  </nav>
-
   <div id="servicios" class="servicios">
     <h2>🐶 Nuestros Servicios</h2>
     <div class="cards">
@@ -102,22 +98,10 @@
         <p>Estamos listos para atender emergencias a cualquier hora del día.</p>
       </div>
     </div>
+    <br><br>
+    <div style="text-align: center;">
+      <a href="/inicio" style="font-size: 24px; text-decoration: none; color: blue;">Volver a Inicio</a>
+    </div>
   </div>
-
-  <script>
-    // Si usas navegación con secciones
-    function mostrarSeccion(id) {
-      const secciones = document.querySelectorAll('div[id]');
-      secciones.forEach(s => s.style.display = 'none');
-      const visible = document.getElementById(id);
-      if (visible) visible.style.display = 'block';
-    }
-
-    // Mostrar esta sección por defecto (opcional)
-    window.onload = () => {
-      mostrarSeccion('servicios');
-    };
-  </script>
-
 </body>
 </html>

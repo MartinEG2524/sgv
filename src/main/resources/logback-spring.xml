@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
 
-    <property name="LOG_PATH" value="logs" />
-    <property name="LOG_FILE" value="sgv/${LOG_PATH}/sgv.log" />
+    <property name="LOG_PATH" value="sgv/logs" />
+    <property name="LOG_FILE" value="${LOG_PATH}/sgv.log" />
 
     <!-- Appender de archivo con rotación diaria -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">

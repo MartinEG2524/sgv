@@ -61,10 +61,12 @@ public class SgvApplication {
             if (usuarioRepository.findByCodigo("admin").isEmpty()) {
                 Usuario adminUser = new Usuario();
                 adminUser.setCodigo("admin");
-                adminUser.setContrasena(passwordEncoder.encode("adminpass"));
+                //adminUser.setContrasena(passwordEncoder.encode("adminpass"));
+                String adminPassword = passwordEncoder.encode("adminpass");
+                adminUser.setContrasena(adminPassword);
                 adminUser.setIdCargo(cargoAdmin);
                 usuarioRepository.save(adminUser);
-                System.out.println("Usuario 'admin' creado.");
+                System.out.println("Usuario 'admin' creado. Contraseña encriptada: " + adminPassword);
             }
 
             if (usuarioRepository.findByCodigo("veterinario").isEmpty()) {
@@ -88,10 +90,12 @@ public class SgvApplication {
             if (usuarioRepository.findByCodigo("cliente").isEmpty()) {
                 Usuario cliUser = new Usuario();
                 cliUser.setCodigo("cliente");
-                cliUser.setContrasena(passwordEncoder.encode("clipass"));
+                //cliUser.setContrasena(passwordEncoder.encode("clipass"));
+                String cliPassword = passwordEncoder.encode("clipass");
+                cliUser.setContrasena(cliPassword);
                 cliUser.setIdCargo(cargoCliente);
                 usuarioRepository.save(cliUser);
-                System.out.println("Usuario 'cliente' creado.");
+                System.out.println("Usuario 'cliente' creado. Contraseña encriptada: " + cliPassword);
             }
         };
     }

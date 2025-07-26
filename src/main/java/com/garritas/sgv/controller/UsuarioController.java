@@ -3,6 +3,10 @@ package com.garritas.sgv.controller;
 import com.garritas.sgv.model.Usuario;
 import com.garritas.sgv.service.UsuarioService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -77,5 +81,26 @@ public class UsuarioController {
         usuario.setIdUsuario(id);
         usuarioService.guardar(usuario);
         return "redirect:/usuarios";
+    }
+
+    @GetMapping("/perfil")
+    public String perfilUsuario(@RequestParam("IdRol") Integer IdRol, @RequestParam("IdUsuario") Integer IdUsuario, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            User username = (User) authentication.getPrincipal();
+            String rol = username.getAuthorities().toArray()[0].toString();
+            model.addAttribute("rol", rol);
+
+            model.addAttribute("IdRol", IdRol);
+            model.addAttribute("IdUsuario", IdUsuario);
+
+            List<Usuario> usuario = usuarioService.buscarUsuario(IdRol, IdUsuario);
+            model.addAttribute("usuarios", usuario);
+
+            return "perfil";
+
+        } else {
+            return "redirect:/login";
+        }
     }
 }

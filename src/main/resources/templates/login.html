@@ -6,50 +6,40 @@
     <link rel="stylesheet" href="/CSS/Estilos.css">
 </head>
 <body>
-
-    <header>
-        <img src="/Imagenes/logo.png" alt="Logo Veterinaria">
-        <nav>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="mascotas.html">Mascotas</a>
-            <a href="servicios.html">Servicios</a>
-            <a href="especialidades.html">Especialidades</a>
-            <a href="contacto.html">Contacto</a>
-        </nav>
-    </header>
-
     <div class="container">
         <img src="/Imagenes/logo.png" alt="Logo">
-        <h2>BIENVENIDO</h2>
-        <form id="inicioForm" action="#" th:action="@{/login}" method="post" >
-            <label for="codigo">CÓDIGO:</label>
-            <input type="text" id="codigo" name="codigo" placeholder="Ingrese su código" required />
-
+        <h1>Bienvenido al Sistema Veterinario de Garritas</h1>
+        <p>Por favor, inicia sesión para continuar.</p>
+        <form id="inicioForm" th:action="@{/login}" method="post">
+            <label for="codigo">CÓDIGO DE USUARIO:</label>
+            <input type="text" id="codigo" name="username" placeholder="Ingrese su código" required />
             <label for="contrasena">CONTRASEÑA:</label>
-            <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required />
-
+            <input type="password" id="contrasena" name="password" placeholder="Ingrese su contraseña" required />
             <div class="buttons">
                 <button type="submit" class="btn-login">INICIAR SESIÓN</button>
-                <button type="reset" class="btn-cancel">CANCELAR</button>
             </div>
-
-            <!-- Si la autenticación falla, mostrará un mensaje -->
-            <div th:if="${param.error}" style="color:red;">
-                Usuario o contraseña incorrecto.
-            </div>
-
-            <!-- Enlace para redirigir a la página de recuperación de contraseña -->
-            <div class="forgot-password">
-                ¿Olvidaste tu contraseña? <br>
-                <a href="restablecer">Clic aquí</a>
-            </div>
-
-            <div class="create-account">
-                <button type="button">CREAR CUENTA</button>
+            <!-- Si la autenticación falla o si el mensaje de error existe, el mensaje se muestra aquí -->
+            <div th:if="${errorMessage != null}" style="color:red;">
+                <p th:text="${errorMessage}"></p>
             </div>
         </form>
-
-        <p th:if="${param.logout}" style="color:green;">¡Se ha cerrado la sesión correctamente!</p>
+        <br>
+        <!-- Enlace para redirigir a la página de recuperación de contraseña -->
+        <div class="forgot-password">
+            <a href="/restablecer">¿Olvidaste tu contraseña? Clic aquí</a>
+        </div>
+        <br><br>
+        <div class="create-account">
+            <a href="/registrar">CREAR CUENTA</a>
+        </div>
+        <!-- Si el mensaje de cierre de sesión existe, se mostrará el mensaje -->
+        <div th:if="${logoutMessage != null}" style="color: green;">
+            <p th:text="${logoutMessage}"></p>
+        </div>
+        <br><br>
+        <div class="create-account">
+            <a href="/inicio">Volver a Inicio</a>
+        </div>
     </div>
 
     <footer>
@@ -62,7 +52,5 @@
             Av. Crisantemos N° 221 – LIMA – PERÚ
         </div>
     </footer>
-
-    <script src="/JS/FuncionLogin.js"></script>
 </body>
-</html>
+</html>    

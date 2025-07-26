@@ -30,12 +30,15 @@ public class WebSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> usuarioRepository.findByCodigo(username)
-                .map(user -> User.withUsername(user.getCodigo())
-                        .password(user.getContrasena())
-                        .roles(user.getIdCargo().getNombre())
-                        .build())
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        return username -> {
+        System.out.println("Buscando usuario: " + username);
+        return usuarioRepository.findByCodigo(username)
+            .map(user -> User.withUsername(user.getCodigo())
+                    .password(user.getContrasena())
+                    .roles(user.getIdCargo().getNombre())
+                    .build())
+            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado."));
+    };
     }
 
     @Bean
@@ -44,7 +47,8 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
                     // Rutas públicas (Accesibles por todos los usuarios)
-                    .requestMatchers("/inicio", "/login", "/registro", "/restablecer").permitAll()
+                    .requestMatchers("/", "/inicio", "/login", "/registrar", "/restablecer", "error", "contacto", "servicios-info", "nosotros").permitAll()
+                    .requestMatchers("/usuarios/**").authenticated()
                     .requestMatchers("/admin/**").hasRole("ADMIN")  // Solo ADMIN puede acceder
                     .requestMatchers("/veterinario/**").hasRole("VETERINARIO")  // Solo VETERINARIO puede acceder
                     .requestMatchers("/recepcionista/**").hasRole("RECEPCIONISTA")  // Solo RECEPCIONISTA puede acceder
@@ -55,12 +59,13 @@ public class WebSecurityConfig {
             )
             .formLogin(formLogin -> formLogin
                 .loginPage("/login")
+                .defaultSuccessUrl("/menu", true)
+                .failureUrl("/login?error=true")
                 .permitAll()
-                .defaultSuccessUrl("/menu", true) 
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/inicio?logout")
+                .logoutSuccessUrl("/login?logout=true")
                 .permitAll()
             )
             .exceptionHandling(exceptionHandling -> exceptionHandling

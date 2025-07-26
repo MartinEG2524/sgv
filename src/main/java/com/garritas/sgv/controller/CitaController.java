@@ -20,7 +20,7 @@ public class CitaController {
     }
 
     // Vista de todas las citas, solo accesible para VETERINARIO, RECEPCIONISTA y ADMIN
-    @PreAuthorize("hasRole('ROLE_VETERINARIO') or hasRole('ROLE_RECEPCIONISTA') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_RECEPCIONISTA') or hasRole('ROLE_VETERINARIO') or hasRole('ROLE_ADMIN')")
     @GetMapping
     public String listar(Model model) {
         List<Cita> citas = citaService.listar();
@@ -29,7 +29,7 @@ public class CitaController {
     }
 
     // Vista para ver una cita específica, solo accesible para VETERINARIO y ADMIN
-    @PreAuthorize("hasRole('ROLE_VETERINARIO') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_CLIENTE') or hasRole('ROLE_RECEPCIONISTA') or hasRole('ROLE_VETERINARIO') or hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public String buscarCita(@PathVariable Long id, Model model) {
         Cita cita = citaService.buscarPorId(id).orElse(null);
@@ -65,9 +65,9 @@ public class CitaController {
     @PreAuthorize("hasRole('ROLE_VETERINARIO') or hasRole('ROLE_ADMIN')")
     @GetMapping("/editar/{id}")
     public String editarCita(@PathVariable Long id, Model model) {
-        Cita cita = citaService.buscarPorId(id).orElse(null); // Obtener la cita
-        model.addAttribute("cita", cita);  // Pasar los datos al frontend para el formulario
-        return "citas/editar";  // Vista Thymeleaf: citas/editar.html
+        Cita cita = citaService.buscarPorId(id).orElse(null);
+        model.addAttribute("cita", cita);
+        return "citas/editar";
     }
 
     // Guardar los cambios de una cita editada
